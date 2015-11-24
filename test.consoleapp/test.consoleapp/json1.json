@@ -1,0 +1,14 @@
+﻿﻿ {
+  "CallbackInformation": {
+    "Type": "http",
+    "OnRequested": "http://localhost:8090/OnRequested",
+    "OnRejected": "http://localhost:8090/OnRejected",
+    "OnResults": "http://localhost:8090/OnResults",
+    "OnRedressed": "http://localhost:8090/OnRedressed",
+    "Credentials": null,
+    "Authorization": null
+  },
+  "ReferenceId": "Saga Development",
+  "Requester": "Dan's Postman Testing",
+  "RequestId": "d58e01ed-e6cb-4080-81a8-6f99d4fff5fd"
+}
