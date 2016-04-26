@@ -1,14 +1,16 @@
-﻿﻿ {
-  "CallbackInformation": {
-    "Type": "http",
-    "OnRequested": "http://localhost:8090/OnRequested",
-    "OnRejected": "http://localhost:8090/OnRejected",
-    "OnResults": "http://localhost:8090/OnResults",
-    "OnRedressed": "http://localhost:8090/OnRedressed",
-    "Credentials": null,
-    "Authorization": null
-  },
-  "ReferenceId": "Saga Development",
-  "Requester": "Dan's Postman Testing",
-  "RequestId": "d58e01ed-e6cb-4080-81a8-6f99d4fff5fd"
+﻿{
+  "ClassName": "System.Net.Http.HttpRequestException",
+  "Message": "Response status code does not indicate success: 400 (Bad Request).",
+  "Data": { },
+  "InnerException": null,
+  "HelpURL": null,
+  "StackTraceString": "   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()\r\n   at Elvis.Provider.Generic.GenericProvider.<RequestCheckAsync>d__16.MoveNext() in c:\\src\\new-elvis\\src\\Provider\\Elvis.Provider.Generic\\GenericProvider.cs:line 112",
+  "RemoteStackTraceString": null,
+  "RemoteStackIndex": 0,
+  "ExceptionMethod": "8\nEnsureSuccessStatusCode\nSystem.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a\nSystem.Net.Http.HttpResponseMessage\nSystem.Net.Http.HttpResponseMessage EnsureSuccessStatusCode()",
+  "HResult": -2146233088,
+  "Source": "System.Net.Http",
+  "WatsonBuckets": null,
+  "SafeSerializationManager": { "m_serializedStates": [ { } ] },
+  "CLR_SafeSerializationManager_RealType": "System.Net.Http.HttpRequestException, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
 }

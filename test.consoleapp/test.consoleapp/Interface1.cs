@@ -1,4 +1,6 @@
-﻿namespace test.consoleapp {
+﻿using System;
+
+namespace test.consoleapp {
 
     public interface Interface1 {
         string Message { get; set; }
@@ -18,5 +20,10 @@
         public string Name { get; set; }
 
         public string OtherMessage { get; set; }
+
+
+		public void Notify(DateTime obj, string str) {
+			var s = "";
+		}
     }
 }
