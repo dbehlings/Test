@@ -17,34 +17,116 @@ using Microsoft.ServiceBus.Messaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-
+using Flurl;
+using Flurl.Http;
+using System.Net.Http;
+using System.Xml.Linq;
+using System.Xml;
+using Microsoft.WindowsAzure.Storage;
 
 namespace test.consoleapp
 {
+
+    public static class FlurlExtensions
+    {
+
+
+        public static Task<HttpResponseMessage> PostContentAsync(this FlurlClient client, string content, string contentType)
+        {
+            var toPost = new StringContent(content, Encoding.Default, contentType);
+            return client.SendAsync(HttpMethod.Post, content: toPost);
+        }
+
+
+        public static Task<HttpResponseMessage> PostContentAsync(this string url, string content, string contentType)
+        {
+
+            return new FlurlClient(url).PostContentAsync(content, contentType);
+
+        }
+
+
+        //public static Task<HttpResponseMessage> PostXmlAsync(this FlurlClient client, object content)
+        //{
+        //    var doc = new XDocument();
+
+        //    var s = doc.CreateWriter();
+        //    s.WriteValue(content);
+
+
+        //        string xml = "";
+        //    var toPost = new StringContent(xml, Encoding.UTF8, "application/xml");
+
+        //    return client
+        //}
+    }
+
+
+    //public class SystemMessagesHub : Hub
+    //{
+    //    private IHubProxy _hub;
+    //    private static ConcurrentDictionary<string, IDisposable> subscriptions = new ConcurrentDictionary<string, IDisposable>();
+
+    //    public SystemMessagesHub()
+    //    {
+
+
+    //    }
+
+
+    //    public override Task OnConnected()
+    //    {
+    //        subscriptions.TryAdd(Context.ConnectionId, Subscribe(Clients.Caller));
+    //        return base.OnConnected();
+    //    }
+
+    //    private IDisposable Subscribe(dynamic caller)
+    //    {
+    //        return _hub.On<IEnumerable<object>>("NewMessage", data =>
+    //        {
+    //            caller.newMessage(data);
+    //        });
+
+    //    }
+
+    //    public override Task OnDisconnected(bool stopCalled)
+    //    {
+    //        IDisposable sub = null;
+    //        if (subscriptions.TryRemove(Context.ConnectionId, out sub))
+    //        {
+    //            sub.Dispose();
+    //        }
+    //        return base.OnDisconnected(stopCalled);
+    //    }
+
+
+
+
+
+
+    //    public async Task<IEnumerable<string>> GetSources()
+    //    {
+    //        return await _hub.Invoke<IEnumerable<string>>("GetSources");
+    //    }
+
+
+
+
+    //}
+
+
+
+
     class Program
     {
         static void Main(string[] args)
         {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+
             var timer = Stopwatch.StartNew();
             try
             {
-                var settings = new JsonSerializerSettings();
-                settings.ContractResolver = new DefaultContractResolver { IgnoreSerializableInterface = false };
-                settings.TraceWriter = new ConsoleTraceWriter();
-                //settings.TypeNameHandling = TypeNameHandling.All;
-                settings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
-                settings.TypeNameHandling = TypeNameHandling.All;
-
-                settings.Error += (o, err) =>
-                {
-                    var s = "";
-                };
-
-                var json = File.ReadAllText("json1.json");
-
-                //var o = JsonConvert.DeserializeAnonymousType(s, new { Message = default(string), Source = default(string), StackTraceString = default(string) }, settings);
-
-                var ex = JsonConvert.DeserializeObject<Exception>(json, settings);
+                MainAsync().Wait();
 
                 timer.Stop();
             }
@@ -65,6 +147,84 @@ namespace test.consoleapp
 
         }
 
+
+
+
+        private static async Task MainAsync()
+        {
+            var json = @"{
+  'AccountId': 'ID-EID10_XML',
+  // mark for update
+  'LogCommunications': 'asdlkmlkmlk',
+  'Mock': 'true',
+  'MockUrl': 'http://localhost:8140/gisPushdirectpost.aspx',
+  'PackageCode': {
+    'SevenYear': 'ID-EID10-1',
+    'TwoYear': 'ID-EID02-1',
+    'Watchdog': 'ID-EIDWD',
+    'SureIdStandardCheck': 'ID-EID10-1',
+    'SureIdTsaAviationCheck': 'ID-AVI-R-1'
+  },
+  'Password': 'nWbsE2WV',
+  'PayloadPassword': 'nWbsE2WV',
+  'RequesterAcctNbr': {
+    'SevenYear': 'ID-EID10',
+    'TwoYear': 'ID-EID02',
+    'Watchdog': 'ID-EIDWD',
+    'SureIdStandardCheck': 'ID-EID10',
+    'SureIdTsaAviationCheck': 'ID-AVI-R'
+  },
+  'RequesterOriginSrc': 'ID-EID10_XML',
+  'ResponseUrl': 'https://localhost:44301/response/gispush',
+  'ServiceUrl': 'http://mocks0:8140/gisPushdirectpost.aspx',
+  'ResponseUsername': 'GISPushTest',
+  'ResponsePassword': 'Test123',
+  'Weight': '1'
+}";
+
+
+
+            //QueueClient queue = QueueClient.CreateFromConnectionString("Endpoint=sb://dan-elvis-local.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=9PgKDcOIyqCKBbmK3tS43Ak74NtslUBx/HQ7Th8fAIE=", "eid.elvis");
+
+            //var m = queue.Receive();
+
+            //Console.WriteLine(m.MessageId);
+
+
+            //var url = "https://localhost:44309/";
+            //var connection = new HubConnection(url);
+
+            //var hub = connection.CreateHubProxy("HomeHub");
+
+            ////var writer = new StreamWriter(@"c:\temp\systemmessages-trace.txt");
+            ////writer.AutoFlush = true;
+
+            ////connection.TraceLevel = TraceLevels.All;
+            ////connection.TraceWriter = writer;
+
+            //hub.On<IEnumerable<object>>("NewMessage", data =>
+            //{
+            //    foreach (var item in data)
+            //    {
+            //        Console.WriteLine(item);
+            //    }
+            //});
+
+            //connection.Start().Wait();
+
+
+            //Console.WriteLine("connected {0}", connection.ConnectionId);
+
+
+
+
+            var d = typeof(Delegate );
+
+
+
+
+
+        }
 
 
         private static void NSBStuff()
@@ -117,18 +277,7 @@ namespace test.consoleapp
 
 
 
-            Mapper.CreateMap<ExpandoObject, Interface2>().ForAllMembers((options) => options.ResolveUsing((resolution) =>
-            {
-                var dictionary = (IDictionary<string, object>)resolution.Context.SourceValue;
-                return dictionary[resolution.Context.MemberName];
-            }));
 
-
-            Mapper.CreateMap<JObject, Interface2>().ForAllMembers(options => options.ResolveUsing(resolution =>
-            {
-                var dictionary = (IDictionary<string, object>)resolution.Context.SourceValue;
-                return dictionary[resolution.Context.MemberName];
-            }));
 
 
             Class1 data = new Class1 { Name = "Jogn", Message = "Hello World!" };
@@ -158,6 +307,21 @@ namespace test.consoleapp
             {
                 Console.WriteLine("{0} --> {1}", message, ex);
             }
+        }
+
+        private class GenericResult
+        {
+            public bool IsFail { get; set; }
+            public bool IsOngoingVettingResult { get; set; }
+            public bool IsPass { get; set; }
+            public bool IsRedress { get; set; }
+
+            public bool IsScore { get; set; }
+            public IEnumerable<string> Offenses { get; set; }
+            public DateTime RedressInitiatedDate { get; set; }
+            public Guid RequestId { get; set; }
+            public int Score { get; set; }
+            public string WorkOrder { get; set; }
         }
     }
 }

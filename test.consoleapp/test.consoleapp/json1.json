@@ -1,16 +1,29 @@
-﻿{
-  "ClassName": "System.Net.Http.HttpRequestException",
-  "Message": "Response status code does not indicate success: 400 (Bad Request).",
-  "Data": { },
-  "InnerException": null,
-  "HelpURL": null,
-  "StackTraceString": "   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()\r\n   at Elvis.Provider.Generic.GenericProvider.<RequestCheckAsync>d__16.MoveNext() in c:\\src\\new-elvis\\src\\Provider\\Elvis.Provider.Generic\\GenericProvider.cs:line 112",
-  "RemoteStackTraceString": null,
-  "RemoteStackIndex": 0,
-  "ExceptionMethod": "8\nEnsureSuccessStatusCode\nSystem.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a\nSystem.Net.Http.HttpResponseMessage\nSystem.Net.Http.HttpResponseMessage EnsureSuccessStatusCode()",
-  "HResult": -2146233088,
-  "Source": "System.Net.Http",
-  "WatsonBuckets": null,
-  "SafeSerializationManager": { "m_serializedStates": [ { } ] },
-  "CLR_SafeSerializationManager_RealType": "System.Net.Http.HttpRequestException, System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
-}
+﻿"{
+  'AccountId': 'ID-EID10_XML',
+  // mark for update
+  'LogCommunications': 'true',
+  'Mock': 'true',
+  'MockUrl': 'http://localhost:8140/gisPushdirectpost.aspx',
+  'PackageCode': {
+    'SevenYear': 'ID-EID10-1',
+    'TwoYear': 'ID-EID02-1',
+    'Watchdog': 'ID-EIDWD',
+    'SureIdStandardCheck': 'ID-EID10-1',
+    'SureIdTsaAviationCheck': 'ID-AVI-R-1'
+  },
+  'Password': 'nWbsE2WV',
+  'PayloadPassword': 'nWbsE2WV',
+  'RequesterAcctNbr': {
+    'SevenYear': 'ID-EID10',
+    'TwoYear': 'ID-EID02',
+    'Watchdog': 'ID-EIDWD',
+    'SureIdStandardCheck': 'ID-EID10',
+    'SureIdTsaAviationCheck': 'ID-AVI-R'
+  },
+  'RequesterOriginSrc': 'ID-EID10_XML',
+  'ResponseUrl': 'https://localhost:44301/response/gispush',
+  'ServiceUrl': 'http://mocks0:8140/gisPushdirectpost.aspx',
+  'ResponseUsername': 'GISPushTest',
+  'ResponsePassword': 'Test123',
+  'Weight': '1'
+}"
